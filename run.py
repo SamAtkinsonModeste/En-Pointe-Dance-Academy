@@ -2,25 +2,34 @@
 import emoji
 from termcolor import colored, cprint
 from pyfiglet import Figlet
-custom_fig = Figlet(font="invita")
+game_title = Figlet(font="georgia11", justify="center")
+
+# Colour Functions
 
 
-def print_blue_on_grey(x): return cprint(x, "red", "on_grey")
+def print_color_light_magenta(text):
+    """
+    Colours text a light magenta
+    """
+    return cprint(text, "light_magenta")
 
 
-def print_red_on_cyan(x): return cprint(x, "red", "on_cyan")
+def print_color_light_blue(text):
+    """
+    Colours text a light blue
+    """
+    return cprint(text, "light_blue")
 
 
-def introduction():
-    print_red_on_cyan(custom_fig.renderText("En Pointe Dance Acaddemy"))
-    print_red_on_cyan("It is the first day back for the final year,")
-    print_blue_on_grey("for the third year students of:")
-    print_blue_on_grey(emoji.emojize(
-        "En Pointe Dance Acacdemy :graduation_cap:"))
-    cprint("Everyone was excited", "magenta")
-    print("checking what color this will be.")
+def game_title_intro_text():
+    """
+    Game Title and game intro text
+    """
+    print_color_light_magenta(
+        game_title.renderText("En Pointe Dance Academy Game"))
+    print_color_light_blue("Step into the world of dance")
+    print_color_light_blue("and follow the journeys of three unique dancers,")
+    print_color_light_blue("in their final year of En Pointe Dance Academy")
 
 
-print_red_on_cyan("My story is what colour here?")
-print_red_on_cyan("Hello, Universe!")
-introduction()
+game_title_intro_text()
