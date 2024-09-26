@@ -26,7 +26,8 @@ def game_title_intro_text():
     Game Title and game intro text
     """
     print_color_light_magenta(
-        game_title.renderText("En Pointe Dance Academy Game"))
+        game_title.renderText("En Pointe"))
+    print_color_light_magenta("En Pointe Dance Academy Game")
     print_color_light_blue("Step into the world of dance")
     print_color_light_blue("and follow the journeys of three unique dancers,")
     print_color_light_blue("in their final year of En Pointe Dance Academy")
