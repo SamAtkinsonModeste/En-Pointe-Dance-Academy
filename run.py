@@ -12,7 +12,7 @@ def print_red_on_cyan(x): return cprint(x, "red", "on_cyan")
 
 
 def introduction():
-    print_red_on_cyan(custom_fig.renderText("En Point Dance Acaddemy"))
+    print_red_on_cyan(custom_fig.renderText("En Pointe Dance Acaddemy"))
     print_red_on_cyan("It is the first day back for the final year,")
     print_blue_on_grey("for the third year students of:")
     print_blue_on_grey(emoji.emojize(
