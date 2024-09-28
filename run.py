@@ -3,7 +3,7 @@ import emoji
 from termcolor import colored, cprint
 from pyfiglet import Figlet
 dance_title = Figlet(font="georgia11", justify="center")
-game_title = Figlet(font="stop", justify="center")
+game_title = Figlet(font="doom", justify="center")
 
 
 # Colour Functions
@@ -56,7 +56,7 @@ def game_title_intro_text():
     Game Title and game intro text
     """
     print_color_light_blue(dance_title.renderText("En Pointe"))
-    print_color_light_magenta(game_title.renderText("Dance Academy Game"))
+    print_color_light_magenta(game_title.renderText("Dance Game"))
     print_color_light_magenta("En Pointe Dance Academy Adventure Game")
     print_color_light_blue("Step into the world of dance.")
     print_color_light_blue(
@@ -77,7 +77,7 @@ def game_title_intro_text():
                 raise ValueError("Error: Did you type the right numbers?")
 
             print_color_light_green(
-                "Great, lets introduce you to our three dancers.")
+                "Great, lets introduce you to our three dance characters.")
             break
 
         except ValueError as e:
