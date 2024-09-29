@@ -6,6 +6,15 @@ georgia11_font = Figlet(font="georgia11")
 doom_font = Figlet(font="doom")
 bolger_font = Figlet(font="bolger")
 
+
+lily_positive_react = [emoji.emojize(
+    "I've got this! Maybe I'll get to sing too :microphone:")]
+lily_neutral_react = [emoji.emojize(
+    "Is ballet being true to myself :thinking_face:")]
+lily_negative_react = [emoji.emojize(
+    "I don't want to let my mum down :anxious_face_with_sweat:")]
+
+
 # colours for the print colour function
 colours = ["light_grey", "light_red", "light_green",
            "light_blue", "light_magenta", "light_cyan", "light_yellow"]
@@ -18,9 +27,8 @@ def print_colour(text, color):
     """
     return cprint(text, color, attrs=["bold"])
 
-# Game Intro function
 
-
+# starting functioning
 def game_title_intro_text():
     """
     Game Title and game intro text
@@ -77,7 +85,7 @@ def student_zoe():
     """
     Student Zoe's character description
     """
-    print_colour("Zoe", colours[3])
+    print_colour("Zoe", colours[5])
     print_colour(emoji.emojize(
         "A rebellious :fire: triple-threat dancer,"), colours[3])
     print_colour("torn between jazz and ballet,", colours[3])
@@ -89,7 +97,7 @@ def student_sara():
     """
     Student Sara's character description
     """
-    print_colour("Sara", colours[5])
+    print_colour("Sara", colours[4])
     print_colour(emoji.emojize(
         "A determined ballet dancer,:flexed_biceps:"), colours[5])
     print_colour("struggling with technique and self-confidence,", colours[5])
@@ -107,7 +115,7 @@ def student_lily():
     print_colour(
         "facing intense pressure from her overbearing mother,", colours[6])
     print_colour(
-        "secretly dreaming of a career in singing.", colours[6])
+        "secretly dreaming of a career in singing.\n", colours[6])
 
 
 def choose_character():
@@ -132,12 +140,69 @@ def choose_character():
                     f"Error:{character_choice.capitalize()} is not correct?")
 
             print_colour(
-                f"You chose: {character_choice.capitalize()}", colours[0])
+                f"You chose: {character_choice.capitalize()}\n", colours[0])
+            first_day()
+
+            student_reaction(character_choice)
+
             break
 
         except ValueError as e:
             print_colour(e, colours[1])
             print_colour("Try again", colours[2])
+
+
+def first_day():
+    """
+    The character Derek St James the director of the academy talks to the third years.
+    """
+    print_colour(
+        "Derek St James the director of En Pointe Academy.", colours[0])
+    print_colour("Gives a speech to the third years,", colours[0])
+    print_colour("about their final year.\n", colours[0])
+    f = open("teachers/derek.txt", "r")
+    lines = f.read()
+    f.close()
+    print_colour(lines, colours[5])
+
+
+def student_reaction(student):
+    print_colour(f"What is {student} thinking?", colours[5])
+    while True:
+        try:
+            print_colour("Is it Positive?", colours[2])
+            print_colour("Is it Neutral?", colours[0])
+            print_colour("Is it Negative?", colours[1])
+            decision = input(colored("Type: Pos, Neut or Neg\n",
+                             "light_cyan", attrs=["bold"])).lower()
+            reactions = ["pos", "neut", "neg"]
+            if decision not in reactions:
+                raise ValueError(
+                    f"Error: Your reaction was {decision.capitalize()}.")
+            if student == "lily":
+                print_colour(f"{student.capitalize()} says:\n",
+                             colours[6])
+            elif student == "zoe":
+                print_colour(f"{student.capitalize()} says:\n",
+                             colours[5])
+            elif student == "sara":
+                print_colour(f"{student.capitalize()} says:\n",
+                             colours[4])
+
+            if student == "lily" and decision == "pos":
+                print_colour(lily_positive_react[0], colours[6])
+            elif student == "lily" and decision == "neut":
+                print_colour(lily_neutral_react[0], colours[6])
+            elif student == "lily" and decision == "neg":
+                print_colour(lily_negative_react[0], colours[6])
+            elif student == "zoe" and decision == "pos":
+                print_colour(lily_positive_react[0], colours[6])
+
+            break
+
+        except ValueError as e:
+            print_colour(e, colours[1])
+            print_colour("Try again", colours[6])
 
 
 game_title_intro_text()
