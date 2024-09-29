@@ -80,10 +80,11 @@ def game_title_intro_text():
     """
     print_colour(georgia11_font.renderText("En Pointe"), colours[5])
     print_colour(doom_font.renderText("Dance Game"), colours[4])
-    print_colour("En Pointe Dance Academy Adventure Game", colours[4])
+    print_colour("En Pointe Dance Academy Adventure Game\n\n", colours[4])
     while True:
         try:
-            print_colour("Ready to step into the world of dance?", colours[0])
+            print_colour(
+                "Ready to step into the world of dance?\n", colours[0])
             print_colour(
                 "When the music starts,", colours[4])
             print_colour(
