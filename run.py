@@ -10,9 +10,69 @@ bolger_font = Figlet(font="bolger")
 colours = ["light_grey", "light_red", "light_green",
            "light_blue", "light_magenta", "light_cyan", "light_yellow"]
 
+
+# Colour Function
+def print_colour(text, color):
+    """
+    Prints text in colours
+    """
+    return cprint(text, color, attrs=["bold"])
+
+# Game Intro function
+
+
+def game_title_intro_text():
+    """
+    Game Title and game intro text
+    """
+    # print_colour(georgia11_font.renderText("En Pointe"), colours[5])
+    print_colour(doom_font.renderText("Dance Game"), colours[4])
+    print_colour("En Pointe Dance Academy Adventure Game", colours[4])
+    while True:
+        try:
+            print_colour(
+                "Ready to step into the world of dance?", colours[0])
+            print_colour(
+                "When the music starts,", colours[4])
+            print_colour(
+                "a dancer knows when to start dancing,", colours[4])
+            print_colour(
+                "because the teacher shouts 4 numbers,", colours[4])
+            print_colour(
+                "to the beat of the music.", colours[4])
+            start_game = input(colored("So Type: 5, 6, 7, 8\n",
+                               "light_grey", attrs=["bold"]))
+            if start_game != "5,6,7,8":
+                raise ValueError(
+                    "Error: Did you type 5,6,7,8  ?")
+
+            print_colour(
+                "Great, lets introduce you to the adventure.\n", colours[2])
+            break
+
+        except ValueError as e:
+            print_colour(e, colours[1])
+            print_colour("Try again", colours[2])
+
+
+# Start the adventure leads to introduction of characters function
+def start_adventure():
+    """
+    Information about the adventure storyline
+    """
+    print_colour(doom_font.renderText("Dance Academy"), colours[5])
+    print_colour(
+        "Follow the journey of one of", colours[3])
+    print_colour(
+        "three unique dance students,", colours[3])
+    print_colour("in their final year of En Pointe Dance Academy.", colours[3])
+    print_colour(
+        "This is a story driven adventure,", colours[4])
+    print_colour(" where every choice matters!", colours[4])
+    print_colour("Lets meet our three student dance characters!\n", colours[5])
+
+
 # STUDENT Character Functions
-
-
 def student_zoe():
     """
     Student Zoe's character description
@@ -50,57 +110,29 @@ def student_lily():
         "secretly dreaming of a career in singing.", colours[6])
 
 
-def start_adventure():
+def choose_character():
     """
-    Information about the adventure storyline
+    Player chooses which character's journey they will follow.
     """
-    print_colour(doom_font.renderText("Dance Academy"), colours[5])
-    print_colour(
-        "Follow the journey of one of", colours[3])
-    print_colour(
-        "three unique dance students,", colours[3])
-    print_colour("in their final year of En Pointe Dance Academy.", colours[3])
-    print_colour(
-        "This is a story driven adventure,", colours[4])
-    print_colour(" where every choice matters!", colours[4])
-    print_colour("Lets meet our three student dance characters!\n", colours[5])
-
-
-# Colour Function
-def print_colour(text, color):
-    """
-    Prints text in colours
-    """
-    return cprint(text, color, attrs=["bold"])
-
-
-def game_title_intro_text():
-    """
-    Game Title and game intro text
-    """
-    # print_colour(georgia11_font.renderText("En Pointe"), colours[5])
-    print_colour(doom_font.renderText("Dance Game"), colours[4])
-    print_colour("En Pointe Dance Academy Adventure Game", colours[4])
+    print_colour("Which charcter's journey", colours[0])
+    print_colour("would you like to follow?", colours[0])
     while True:
         try:
-            print_colour(
-                "Ready to step into the world of dance?", colours[0])
-            print_colour(
-                "When the music starts,", colours[4])
-            print_colour(
-                "a dancer knows when to start dancing,", colours[4])
-            print_colour(
-                "because the teacher shouts 4 numbers,", colours[4])
-            print_colour(
-                "to the beat of the music.", colours[4])
-            start_game = input(colored("So Type: 5, 6, 7, 8\n",
-                               "light_grey", attrs=["bold"]))
-            if start_game != "5,6,7,8":
+            print_colour("Zoe?", colours[3])
+            print_colour("Sara?", colours[4])
+            print_colour("Lily?", colours[6])
+
+            character_choice = input(
+                colored("Enter the name of the character:\n", "light_grey",
+                        attrs=["bold"])).lower()
+            print(character_choice)
+            characters = ["zoe", "sara", "lily"]
+            if character_choice not in characters:
                 raise ValueError(
-                    "Error: Did you type 5,6,7,8  ?")
+                    f"Error:{character_choice.capitalize()} is not correct?")
 
             print_colour(
-                "Great, lets introduce you to the adventure.\n", colours[2])
+                f"You chose: {character_choice.capitalize()}", colours[0])
             break
 
         except ValueError as e:
@@ -113,3 +145,4 @@ start_adventure()
 student_zoe()
 student_sara()
 student_lily()
+choose_character()
