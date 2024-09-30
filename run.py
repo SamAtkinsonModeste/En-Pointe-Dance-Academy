@@ -86,7 +86,14 @@ def game_play():
     Main game play function
     """
     print_colour(georgia11_font.renderText("En Pointe"), colours[5])
-    print_colour(doom_font.renderText("Dance Academy Game"), colours[4])
+    print_colour(doom_font.renderText("Dance Academy"), colours[5])
+    print_colour('Step into the world of dance'
+                 ' and follow the journeys of three unique dancers'
+                 ' in their final year at the prestigious\n'
+                 'En Pointe Dance Academy!\n'
+                 'This is not just a dance game'
+                 ' but a story-driven adventure'
+                 ' where every choice matters.', colours[4])
 
 
 game_play()
