@@ -1,5 +1,6 @@
 # importing emoji library and coloured, cprint from termcolor
 import emoji
+import os
 from termcolor import colored, cprint
 from pyfiglet import Figlet
 georgia11_font = Figlet(font="georgia11")
@@ -78,7 +79,8 @@ class Reactions:
         return f'{self.negative}'
 
 
-# def choose_character():
+def next_clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def game_play():
@@ -91,6 +93,19 @@ def game_play():
                  'and follow the journeys of three unique dancers\n'
                  'in their final year at the prestigious\n'
                  'En Pointe Dance Academy!\n', colours[4])
+    while True:
+        try:
+            next_display = input(colored(
+                "Type Next  ", "light_grey", attrs=["bold"])).lower()
+            if next_display != 'next':
+                raise ValueError("Did you type Next?")
+
+            next_clear()
+            break
+
+        except ValueError as e:
+            print_colour(e, colours[1])
+            print_colour("Try again", colours[2])
 
 
 game_play()
