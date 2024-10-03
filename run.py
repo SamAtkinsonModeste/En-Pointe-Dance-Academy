@@ -6,6 +6,7 @@ from pyfiglet import Figlet
 georgia11_font = Figlet(font="georgia11")
 doom_font = Figlet(font="doom")
 bolger_font = Figlet(font="bolger")
+male_female = ["male", "female"]
 
 # colours for the print colour function
 colours = ["light_grey", "light_red", "light_green",
@@ -77,7 +78,60 @@ class Reactions:
         return f'{self.negative}'
 
 
-def check_errors(input_text, error_text):
+def chose_gender():
+    """
+    User chooses between male or female
+    character with raise ValueError 
+    and a confirmation yes or no
+    to give them the option to change their minds
+    """
+    while True:
+        try:
+            which_gender = input(
+                colored("Type Male or Female:\n",
+                        "light_grey", attrs=["bold"])).lower()
+            genders = ["male", "female"]
+
+            if which_gender not in genders:
+                raise ValueError("Did you type Male or Female?")
+
+            proceed_to_next = True
+
+        except ValueError as e:
+            print_colour(e, colours[1])
+            print_colour("Try again", colours[2])
+            proceed_to_next = False
+
+        if which_gender == "male":
+            print_colour(f"You chose {which_gender.capitalize()}", colours[5])
+        else:
+            print_colour(f"You chose {which_gender.capitalize()}", colours[4])
+
+        if proceed_to_next:
+            try:
+                happy_choice = input(
+                    colored("If you are happy with your choice type Y:\n"
+                            "Or if you want to change type N:\n",
+                            "light_grey", attrs=["bold"])).lower()
+                choices = ["y", "n"]
+                yes_no = happy_choice
+                ask_again = happy_choice
+                if yes_no not in choices:
+                    raise ValueError("Did you type Y or N?")
+
+                else:
+                    next_clear()
+
+                break
+
+            except ValueError as e:
+                print_colour(e, colours[1])
+                print_colour("Try again", colours[2])
+                proceed_to_next = False
+                ask_again
+
+
+def check_errors_inputs(input_text, value_text, error_text):
     """
     Cheaks for errors in inputs and sends error meesages to the user
     also clears the terminal once enter is hit
@@ -86,13 +140,37 @@ def check_errors(input_text, error_text):
         try:
             next_display = input(colored(
                 f"{input_text}\n", "light_grey", attrs=["bold"])).lower()
-            if next_display != f"{input_text}":
+            if next_display != f"{value_text}":
                 print(type(next_display))
-                print(next_display)
+                print(value_text)
                 raise ValueError(f"{error_text}")
-            else:
-                next_clear()
-                break
+
+        except ValueError as e:
+            print_colour(e, colours[1])
+            print_colour("Try again", colours[2])
+
+        else:
+            next_clear()
+            return value_text
+
+
+def check_errors_list_inputs(input_text, options, error_text):
+    """
+    Cheaks for errors in inputs and checks if 
+    input value is in a list. Sends error message to the user
+    also clears the terminal once enter is hit
+    """
+    while True:
+        try:
+            next_display = input(colored(
+                f"{input_text}\n", "light_grey", attrs=["bold"])).lower()
+            value_text = next_display
+            if value_text not in options:
+                print(type(value_text))
+                print(value_text)
+                raise ValueError(f"{error_text}")
+
+            break
 
         except ValueError as e:
             print_colour(e, colours[1])
@@ -104,6 +182,20 @@ def next_clear():
     Clears the terminal as if turning the pages of a book
     """
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def game_play():
+    """
+    Main game play function
+    """
+    print_colour(georgia11_font.renderText("En Pointe"), colours[5])
+    print_colour(doom_font.renderText("Dance Academy"), colours[5])
+    print_colour('Step into the world of dance\n'
+                 'and follow the journeys of three unique dancers\n'
+                 'in their final year at the prestigious\n'
+                 'En Pointe Dance Academy!', colours[4])
+    check_errors_inputs("To continue type: Next",
+                        "next", "Did you type: Next?")
 
 
 def about_game():
@@ -132,83 +224,28 @@ def about_game():
                  "Those numbers are:", colours[3])
     print_colour("5,6,7,8", colours[6])
 
+    check_errors_inputs("To begin type: 5,6,7,8", "5,6,7,8",
+                        "Did you type:  5,6,7,8 ?")
 
-def meet_the_characters():
+
+def create_character():
     """
-    Introduces the player to the characters.
-    Player gets to choose which one to play as.
+   The player can create their character.
+   They can choose male or female and create a name.
+They will have a choice of three background and personalities
+for their character as well as a choice of secret talents. 
+   .
     """
-    print_colour(doom_font.renderText("Students"), colours[5])
-    print_colour("Meet the three dance student"
-                 " charcters\n"
-                 "to choose from:", colours[5])
-    print_colour(zoe.description(), colours[3])
-    print_colour(sara.description(), colours[4])
-    print_colour(lily.description(), colours[6])
-
-    while True:
-        try:
-            character = input(colored("Type character name:\n",
-                                      "light_grey",
-                                      attrs=["bold"])).lower()
-            characters = ["zoe", "lily", "sara"]
-            if character not in characters:
-                raise ValueError("You typed "
-                                 f"{character.capitalize()}.\n"
-                                 "Please type one of the character's names "
-                                 "and check the spelling.")
-            print(character)
-            next_clear()
-            return character
-
-        except ValueError as e:
-            print_colour(e, colours[1])
-            print_colour("Try again.", colours[2])
+    print_colour(doom_font.renderText("Character Build"), colours[5])
+    print_colour("You can create your own character.\n"
+                 "Let's start by choosing:", colours[5])
+    print(colored("Male", "light_cyan", attrs=["bold"]),
+          colored("or", "light_grey", attrs=["bold"]),
+          colored("Female", "light_magenta", attrs=["bold"]))
+    chose_gender()
 
 
-def game_play():
-    """
-    Main game play function
-    """
-    print_colour(georgia11_font.renderText("En Pointe"), colours[5])
-    print_colour(doom_font.renderText("Dance Academy"), colours[5])
-    print_colour('Step into the world of dance\n'
-                 'and follow the journeys of three unique dancers\n'
-                 'in their final year at the prestigious\n'
-                 'En Pointe Dance Academy!', colours[4])
-
-    while True:
-        try:
-            next_display = input(colored(
-                "Type Next:\n", "light_grey", attrs=["bold"])).lower()
-            if next_display != "next":
-                raise ValueError("Did you type Next?")
-
-            next_clear()
-            break
-
-        except ValueError as e:
-            print_colour(e, colours[1])
-            print_colour("Try again", colours[2])
-
+if __name__ == "__main__":
+    game_play()
     about_game()
-
-    while True:
-        try:
-            next_display = input(colored(
-                "To begin type: 5,6,7,8\n",
-                "light_grey", attrs=["bold"])).lower()
-            if next_display != "5,6,7,8":
-                raise ValueError("Did you type 5,6,7,8?")
-
-            next_clear()
-            break
-
-        except ValueError as e:
-            print_colour(e, colours[1])
-            print_colour("Try again", colours[2])
-
-    meet_the_characters()
-
-
-game_play()
+    create_character()
