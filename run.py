@@ -1,4 +1,5 @@
-# importing emoji library and coloured, cprint from termcolor
+# importing json, emoji library and coloured, cprint from termcolor
+import json
 import emoji
 import os
 from termcolor import colored, cprint
@@ -11,8 +12,12 @@ bolger_font = Figlet(font="bolger")
 colours = ["light_grey", "light_red", "light_green",
            "light_blue", "light_magenta", "light_cyan", "light_yellow"]
 
+with open("dialog-reactions.json", "r") as file:
+    data = json.load(file)
 
 # Colour Function
+
+
 def print_colour(text, color):
     """
     Prints text in colours
@@ -102,7 +107,7 @@ def check_errors_inputs(input_text, value_text, error_text):
 
 def check_errors_list_inputs(input_text, options, error_text):
     """
-    Cheaks for errors in inputs and checks if 
+    Cheaks for errors in inputs and checks if
     input value is in a list. Sends error message to the user
     also clears the terminal once enter is hit
     """
@@ -202,8 +207,65 @@ def chose_gender():
             f"Is {character_gender} correct?\n"
             "Type Y for Yes or N for No:", yes_no, "Did you type Y or N")
         if agree_disagree == agree:
-            next_clear()
-            break
+            print(character_gender)
+            return character_gender
+
+        break
+
+
+def student_name(person, names):
+    yes_no = ["y", "n"]
+    agree = "y"
+    disagree = "n"
+
+    while disagree:
+        print_colour(f"You can create a name for your {person}", colours[2])
+        print_colour("Or select one from suggested names.", colours[2])
+        name_character = check_errors_list_inputs("Would you like "
+                                                  "to create a name?\n"
+                                                  " Type Y for Yes"
+                                                  " and N for No",
+                                                  yes_no,
+                                                  "Did you type Y or N")
+        name_character
+
+        if name_character == agree:
+            create_name = name_character
+            create_name = input("Type a first name only:")
+            create_name
+            print(create_name)
+
+            return create_name
+        else:
+            if disagree:
+                choose_name = check_errors_list_inputs(f"Choose from:{names}",
+                                                       names,
+                                                       "Did you type"
+                                                       " the name correctly?")
+                choose_name
+
+                return choose_name
+
+        break
+
+
+def students_info(people):
+    choice = ["a", "b", "c"]
+    for student in data[people]:
+        print(colored(f"Id: {student['id']}\n", "light_yellow",
+                      attrs=["bold"]),
+              colored(
+                  f"Background:\n {student['background']}\n",
+                  "light_cyan",
+            attrs=['bold']),
+            colored("Personality:\n"
+                    f" {student['personality']}\n\n",
+                    "light_grey",
+                    attrs=['bold']))
+    chosen_person = check_errors_list_inputs(
+        "Would you like A, B or C ", choice, "Did you type A, B or C?")
+
+    return chosen_person
 
 
 def create_character():
@@ -219,7 +281,29 @@ for their character as well as a choice of secret talents.
     print(colored("Male", "light_cyan", attrs=["bold"]),
           colored("or", "light_grey", attrs=["bold"]),
           colored("Female", "light_magenta", attrs=["bold"]))
-    chose_gender()
+
+    player_gender = chose_gender()
+    player_gender
+    male_names = ["liam", "jordan", "ethan"]
+    female_names = ["zoe", "maya", "sophie"]
+
+    if player_gender == "male":
+        male_character = player_gender
+        male_student_name = student_name(
+            colored(f"{male_character} student.",
+                    "light_cyan", attrs=['bold']),
+            male_names)
+        male_student_name
+        print_colour(f"You chose: {male_student_name}", colours[5])
+
+    if player_gender == "female":
+        female_character = player_gender
+        female_student_name = student_name(
+            colored(f"{female_character} student.",
+                    "light_magenta", attrs=['bold']),
+            female_names)
+        female_student_name
+        print_colour(f"You chose: {female_student_name}", colours[4])
 
 
 if __name__ == "__main__":
