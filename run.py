@@ -81,7 +81,7 @@ class Reactions:
 def chose_gender():
     """
     User chooses between male or female
-    character with raise ValueError 
+    character with raise ValueError
     and a confirmation yes or no
     to give them the option to change their minds
     """
@@ -115,11 +115,11 @@ def chose_gender():
                             "light_grey", attrs=["bold"])).lower()
                 choices = ["y", "n"]
                 yes_no = happy_choice
-                ask_again = happy_choice
+
                 if yes_no not in choices:
                     raise ValueError("Did you type Y or N?")
 
-                else:
+                if happy_choice == "y":
                     next_clear()
 
                 break
@@ -128,7 +128,9 @@ def chose_gender():
                 print_colour(e, colours[1])
                 print_colour("Try again", colours[2])
                 proceed_to_next = False
-                ask_again
+
+            if not proceed_to_next:
+                continue
 
 
 def check_errors_inputs(input_text, value_text, error_text):
@@ -228,7 +230,7 @@ def about_game():
                         "Did you type:  5,6,7,8 ?")
 
 
-def create_character():
+def create_character_gender():
     """
    The player can create their character.
    They can choose male or female and create a name.
@@ -248,4 +250,4 @@ for their character as well as a choice of secret talents.
 if __name__ == "__main__":
     game_play()
     about_game()
-    create_character()
+    create_character_gender()
