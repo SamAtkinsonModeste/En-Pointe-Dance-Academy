@@ -6,7 +6,6 @@ from pyfiglet import Figlet
 georgia11_font = Figlet(font="georgia11")
 doom_font = Figlet(font="doom")
 bolger_font = Figlet(font="bolger")
-male_female = ["male", "female"]
 
 # colours for the print colour function
 colours = ["light_grey", "light_red", "light_green",
@@ -78,61 +77,6 @@ class Reactions:
         return f'{self.negative}'
 
 
-def chose_gender():
-    """
-    User chooses between male or female
-    character with raise ValueError
-    and a confirmation yes or no
-    to give them the option to change their minds
-    """
-    while True:
-        try:
-            which_gender = input(
-                colored("Type Male or Female:\n",
-                        "light_grey", attrs=["bold"])).lower()
-            genders = ["male", "female"]
-
-            if which_gender not in genders:
-                raise ValueError("Did you type Male or Female?")
-
-            proceed_to_next = True
-
-        except ValueError as e:
-            print_colour(e, colours[1])
-            print_colour("Try again", colours[2])
-            proceed_to_next = False
-
-        if which_gender == "male":
-            print_colour(f"You chose {which_gender.capitalize()}", colours[5])
-        else:
-            print_colour(f"You chose {which_gender.capitalize()}", colours[4])
-
-        if proceed_to_next:
-            try:
-                happy_choice = input(
-                    colored("If you are happy with your choice type Y:\n"
-                            "Or if you want to change type N:\n",
-                            "light_grey", attrs=["bold"])).lower()
-                choices = ["y", "n"]
-                yes_no = happy_choice
-
-                if yes_no not in choices:
-                    raise ValueError("Did you type Y or N?")
-
-                if happy_choice == "y":
-                    next_clear()
-
-                break
-
-            except ValueError as e:
-                print_colour(e, colours[1])
-                print_colour("Try again", colours[2])
-                proceed_to_next = False
-
-            if not proceed_to_next:
-                continue
-
-
 def check_errors_inputs(input_text, value_text, error_text):
     """
     Cheaks for errors in inputs and sends error meesages to the user
@@ -172,11 +116,12 @@ def check_errors_list_inputs(input_text, options, error_text):
                 print(value_text)
                 raise ValueError(f"{error_text}")
 
-            break
-
         except ValueError as e:
             print_colour(e, colours[1])
             print_colour("Try again", colours[2])
+
+        else:
+            return value_text
 
 
 def next_clear():
@@ -230,13 +175,43 @@ def about_game():
                         "Did you type:  5,6,7,8 ?")
 
 
-def create_character_gender():
+def chose_gender():
+    """
+   Gives the player a choice of gender for their character
+   The player is asked a yes or no queston so they can change
+   the gender if they wish.
+    """
+    male_female = ["male", "female"]
+    yes_no = ["y", "n"]
+    agree = "y"
+    disagree = "n"
+    while disagree:
+        chose_gender = check_errors_list_inputs(
+            "Type Male or Female", male_female, "Did You type Male or Female?")
+        chose_gender
+        character_gender = chose_gender
+        if character_gender == "male":
+            male = character_gender
+            print_colour(f"You chose {male}", colours[5])
+
+        if character_gender == "female":
+            female = character_gender
+            print_colour(f"You chose {female}", colours[4])
+
+        agree_disagree = check_errors_list_inputs(
+            f"Is {character_gender} correct?\n"
+            "Type Y for Yes or N for No:", yes_no, "Did you type Y or N")
+        if agree_disagree == agree:
+            next_clear()
+            break
+
+
+def create_character():
     """
    The player can create their character.
    They can choose male or female and create a name.
 They will have a choice of three background and personalities
-for their character as well as a choice of secret talents. 
-   .
+for their character as well as a choice of secret talents.
     """
     print_colour(doom_font.renderText("Character Build"), colours[5])
     print_colour("You can create your own character.\n"
@@ -250,4 +225,4 @@ for their character as well as a choice of secret talents.
 if __name__ == "__main__":
     game_play()
     about_game()
-    create_character_gender()
+    create_character()
