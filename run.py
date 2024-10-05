@@ -92,8 +92,6 @@ def check_errors_inputs(input_text, value_text, error_text):
             next_display = input(colored(
                 f"{input_text}\n", "light_grey", attrs=["bold"])).lower()
             if next_display != f"{value_text}":
-                print(type(next_display))
-                print(value_text)
                 raise ValueError(f"{error_text}")
 
         except ValueError as e:
@@ -117,8 +115,6 @@ def check_errors_list_inputs(input_text, options, error_text):
                 f"{input_text}\n", "light_grey", attrs=["bold"])).lower()
             value_text = next_display
             if value_text not in options:
-                print(type(value_text))
-                print(value_text)
                 raise ValueError(f"{error_text}")
 
         except ValueError as e:
@@ -189,28 +185,27 @@ def chose_gender():
     male_female = ["male", "female"]
     yes_no = ["y", "n"]
     agree = "y"
-    disagree = "n"
+    disagree = True
     while disagree:
         chose_gender = check_errors_list_inputs(
             "Type Male or Female", male_female, "Did You type Male or Female?")
-        chose_gender
-        character_gender = chose_gender
-        if character_gender == "male":
-            male = character_gender
+
+        if chose_gender == "male":
+            male = chose_gender
             print_colour(f"You chose {male}", colours[5])
 
-        if character_gender == "female":
-            female = character_gender
+        if chose_gender == "female":
+            female = chose_gender
             print_colour(f"You chose {female}", colours[4])
 
         agree_disagree = check_errors_list_inputs(
-            f"Is {character_gender} correct?\n"
+            f"Is {chose_gender} correct?\n"
             "Type Y for Yes or N for No:", yes_no, "Did you type Y or N")
         if agree_disagree == agree:
-            print(character_gender)
-            return character_gender
+            disagree = False
+            return chose_gender
 
-        break
+        print_colour("Please reselect:", colours[6])
 
 
 def student_name(person, names):
@@ -227,12 +222,12 @@ def student_name(person, names):
                                                   " and N for No",
                                                   yes_no,
                                                   "Did you type Y or N")
-        name_character
 
         if name_character == agree:
             create_name = name_character
-            create_name = input("Type a first name only:")
-            create_name
+            create_name = input(
+                colored("Type a first name only: ", "light_yellow",
+                        attrs=["bold"]))
             print(create_name)
 
             return create_name
@@ -242,7 +237,6 @@ def student_name(person, names):
                                                        names,
                                                        "Did you type"
                                                        " the name correctly?")
-                choose_name
 
                 return choose_name
 
@@ -275,6 +269,11 @@ def create_character():
 They will have a choice of three background and personalities
 for their character as well as a choice of secret talents.
     """
+
+    name = ""
+    about = ""
+    secret = ""
+
     print_colour(doom_font.renderText("Character Build"), colours[5])
     print_colour("You can create your own character.\n"
                  "Let's start by choosing:", colours[5])
@@ -283,7 +282,6 @@ for their character as well as a choice of secret talents.
           colored("Female", "light_magenta", attrs=["bold"]))
 
     player_gender = chose_gender()
-    player_gender
     male_names = ["liam", "jordan", "ethan"]
     female_names = ["zoe", "maya", "sophie"]
 
@@ -293,8 +291,11 @@ for their character as well as a choice of secret talents.
             colored(f"{male_character} student.",
                     "light_cyan", attrs=['bold']),
             male_names)
-        male_student_name
+
         print_colour(f"You chose: {male_student_name}", colours[5])
+        print(male_student_name)
+        students_info("male-students")
+        name = male_student_name
 
     if player_gender == "female":
         female_character = player_gender
@@ -304,9 +305,16 @@ for their character as well as a choice of secret talents.
             female_names)
         female_student_name
         print_colour(f"You chose: {female_student_name}", colours[4])
+        print(female_student_name)
+        students_info("female-students")
+
+    print(player_gender)
+    return name, about, secret
 
 
 if __name__ == "__main__":
     game_play()
     about_game()
-    create_character()
+    name, about, secret = create_character()
+    p1 = Student(name, about, secret)
+    print(p1)
