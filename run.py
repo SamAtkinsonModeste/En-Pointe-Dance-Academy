@@ -356,7 +356,7 @@ def secrets():
             "light_yellow",
             attrs=['bold']),)
     secret_talent = check_errors_list_inputs(
-        "What character traits would you like to chose from: A, B or C ",
+        "What character traits would you like to chose from: A, B, C or D ",
         choices, "Did you type A, B, C, or D ?")
 
     if secret_talent == "a":
