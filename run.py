@@ -39,10 +39,14 @@ class Student:
         """
         Describes the student
         """
-        return f"{self.name}\n{self.about}\n{self.secret}"
-
+        about_me = print_colour(f"My name is {self.name}"
+                                f" My secret talent is {self.secret}",
+                                colours[3])
+        return about_me
 
 # Dance Student Characters
+
+
 zoe = Student('Zoe', emoji.emojize(
     "A rebellious triple-threat dancer.:fire:"),
     'Torn between jazz and ballet,\n'
@@ -111,9 +115,9 @@ def check_errors_list_inputs(input_text, options, error_text):
     """
     while True:
         try:
-            next_display = input(colored(
+            value_text = input(colored(
                 f"{input_text}\n", "light_grey", attrs=["bold"])).lower()
-            value_text = next_display
+
             if value_text not in options:
                 raise ValueError(f"{error_text}")
 
@@ -186,6 +190,15 @@ def chose_gender():
     yes_no = ["y", "n"]
     agree = "y"
     disagree = True
+
+    print_colour(doom_font.renderText("Character Build"), colours[5])
+    print_colour(doom_font.renderText("Gender"), colours[5])
+    print_colour("You can create your own character.\n"
+                 "Let's start by choosing:", colours[5])
+    print(colored("Male", "light_cyan", attrs=["bold"]),
+          colored("or", "light_grey", attrs=["bold"]),
+          colored("Female", "light_magenta", attrs=["bold"]))
+
     while disagree:
         chose_gender = check_errors_list_inputs(
             "Type Male or Female", male_female, "Did You type Male or Female?")
@@ -208,13 +221,19 @@ def chose_gender():
         print_colour("Please reselect:", colours[6])
 
 
-def student_name(person, names):
+def student_name():
     yes_no = ["y", "n"]
     agree = "y"
     disagree = "n"
+    f_names = ["zoe", "maya", "lily"]
+    m_names = ["liam", "jordan", "ethan"]
 
+    next_clear()
     while disagree:
-        print_colour(f"You can create a name for your {person}", colours[2])
+        print_colour(doom_font.renderText("Character Build"), colours[5])
+        print_colour(doom_font.renderText("Name"), colours[5])
+        print_colour(
+            f"You can create a name for your {gender} student", colours[2])
         print_colour("Or select one from suggested names.", colours[2])
         name_character = check_errors_list_inputs("Would you like "
                                                   "to create a name?\n"
@@ -228,93 +247,154 @@ def student_name(person, names):
             create_name = input(
                 colored("Type a first name only: ", "light_yellow",
                         attrs=["bold"]))
-            print(create_name)
+            if gender == "female":
+                create_name = colored(
+                    create_name.capitalize(), "light_magenta", attrs=["bold"])
 
+            if gender == "male":
+                create_name = colored(
+                    create_name.capitalize(), "light_cyan", attrs=["bold"])
+            print_colour("You have chosen the name:", colours[0])
+            print(f" {create_name} ")
+            next_clear()
             return create_name
+
         else:
+
+            if gender == "female":
+                names = colored(
+                    f_names, "light_magenta", attrs=["bold"])
+
+            if gender == "male":
+                names = colored(m_names, "light_cyan", attrs=["bold"])
+
             if disagree:
-                choose_name = check_errors_list_inputs(f"Choose from:{names}",
+                choose_name = check_errors_list_inputs("Choose from these"
+                                                       f" {gender} names:"
+                                                       f"{names}",
                                                        names,
                                                        "Did you type"
                                                        " the name correctly?")
 
-                return choose_name
+                if gender == "female":
+                    choose_name = colored(
+                        choose_name.capitalize(), "light_magenta",
+                        attrs=["bold"])
+                else:
+                    choose_name = colored(
+                        choose_name.capitalize(), "light_cyan", attrs=["bold"])
 
-        break
+            print_colour("You have chosen the name:", colours[0])
+            print(f"{choose_name}")
+            next_clear()
+            return choose_name
 
 
-def students_info(people):
+def students_info():
     choice = ["a", "b", "c"]
+
+    if gender == "female":
+        people = "female-students"
+    if gender == "male":
+        people = "male-students"
+
+    print_colour(doom_font.renderText("Character Build"), colours[5])
+    print_colour(doom_font.renderText("Characteristics"), colours[5])
+    print_colour(
+        "You will be shown three characteristics to choose from.", colours[2])
+    print_colour("Each one will consist of:", colours[2])
+    print_colour("Background:", colours[5])
+    check_errors_inputs("Are you ready to view them? Type: OK", "ok",
+                        "Did you type:  Ok ?")
+
+    next_clear()
+
     for student in data[people]:
-        print(colored(f"Id: {student['id']}\n", "light_yellow",
-                      attrs=["bold"]),
-              colored(
-                  f"Background:\n {student['background']}\n",
-                  "light_cyan",
-            attrs=['bold']),
-            colored("Personality:\n"
-                    f" {student['personality']}\n\n",
-                    "light_grey",
-                    attrs=['bold']))
+        print(colored(
+            f"Background:\n {student['background']}\n",
+            "light_cyan",
+            attrs=['bold']),)
     chosen_person = check_errors_list_inputs(
-        "Would you like A, B or C ", choice, "Did you type A, B or C?")
+        "What character traits would you like to chose from: A, B or C ",
+        choice, "Did you type A, B or C?")
+
+    if chosen_person == "a":
+        chosen_person = print(colored(
+            f"Background:\n {data[people][0]['background']}\n",
+            "light_cyan",
+            attrs=['bold']))
+
+    elif chosen_person == "b":
+        chosen_person = print(colored(
+            f"Background:\n {data[people][1]['background']}\n",
+            "light_cyan",
+            attrs=['bold']))
+    elif chosen_person == "c":
+        chosen_person = print(colored(
+            f"Background:\n {data[people][2]['background']}\n",
+            "light_cyan",
+            attrs=['bold']))
 
     return chosen_person
 
 
+def secrets():
+    # next_clear()
+    choices = ["a", "b", "c", "d"]
+    print_colour(doom_font.renderText("Character Build"), colours[5])
+    print_colour(doom_font.renderText("Secret Talents"), colours[5])
+    print_colour(
+        "You will be shown four secret talents to choose from.", colours[2])
+    check_errors_inputs("Are you ready to view them? Type: OK", "ok",
+                        "Did you type:  Ok ?")
+
+    hidden_talent = data["secrets"]
+
+    for talent in hidden_talent:
+        print(colored(
+            f"{talent['secret']}\n",
+            "light_yellow",
+            attrs=['bold']),)
+    secret_talent = check_errors_list_inputs(
+        "What character traits would you like to chose from: A, B or C ",
+        choices, "Did you type A, B, C, or D ?")
+
+    if secret_talent == "a":
+        secret_talent = print_colour(hidden_talent[0]["secret"], colours[3])
+
+    elif secret_talent == "b":
+        secret_talent = print_colour(hidden_talent[1]["secret"], colours[3])
+
+    elif secret_talent == "c":
+        secret_talent = print_colour(hidden_talent[2]["secret"], colours[3])
+
+    elif secret_talent == "d":
+        secret_talent = print_colour(hidden_talent[3]["secret"], colours[3])
+
+    return secret_talent
+
+
 def create_character():
     """
-   The player can create their character.
-   They can choose male or female and create a name.
-They will have a choice of three background and personalities
-for their character as well as a choice of secret talents.
+
     """
+    name = student_name()
+    about = students_info()
+    secret = secrets()
+    student_character = Student(f"{name}",
+                                f"{about}", f"{secret}")
 
-    name = ""
-    about = ""
-    secret = ""
-
-    print_colour(doom_font.renderText("Character Build"), colours[5])
-    print_colour("You can create your own character.\n"
-                 "Let's start by choosing:", colours[5])
-    print(colored("Male", "light_cyan", attrs=["bold"]),
-          colored("or", "light_grey", attrs=["bold"]),
-          colored("Female", "light_magenta", attrs=["bold"]))
-
-    player_gender = chose_gender()
-    male_names = ["liam", "jordan", "ethan"]
-    female_names = ["zoe", "maya", "sophie"]
-
-    if player_gender == "male":
-        male_character = player_gender
-        male_student_name = student_name(
-            colored(f"{male_character} student.",
-                    "light_cyan", attrs=['bold']),
-            male_names)
-
-        print_colour(f"You chose: {male_student_name}", colours[5])
-        print(male_student_name)
-        students_info("male-students")
-        name = male_student_name
-
-    if player_gender == "female":
-        female_character = player_gender
-        female_student_name = student_name(
-            colored(f"{female_character} student.",
-                    "light_magenta", attrs=['bold']),
-            female_names)
-        female_student_name
-        print_colour(f"You chose: {female_student_name}", colours[4])
-        print(female_student_name)
-        students_info("female-students")
-
-    print(player_gender)
-    return name, about, secret
+    return student_character
 
 
 if __name__ == "__main__":
     game_play()
     about_game()
-    name, about, secret = create_character()
-    p1 = Student(name, about, secret)
-    print(p1)
+    gender = chose_gender()
+    print(gender)
+    player = create_character()
+    print(player)
+    print(player.description())
+    print(f"I am class instance {player.name}")
+    print(player.about)
+    print(player.secret)
