@@ -31,36 +31,38 @@
     ],
     "female-students": [
         {
-            "id": "female1",
-            "background": "Female-A is a triple threat, excelling in ballet, jazz, and modern dance. Her exceptional talent earned her a full scholarship at En Pointe Dance Academy, which is a testament to her hard work and dedication despite coming from a humble background.",
-            "personality": "She has a rebellious spirit, often challenging norms and pushing boundaries in her performances. Her tough exterior hides a vulnerability rooted in her past struggles. She is passionate and determined, always striving to prove herself."
+            "background": "Female-A: \n is a triple threat, excelling in ballet, jazz, and modern dance.\n Her exceptional talent earned her a full scholarship at En Pointe Dance Academy.\n She has a rebellious spirit, often challenging people in authority. \n Her tough exterior hides a vulnerability rooted in her past struggles. She is passionate and determined, always striving to prove herself."
         },
         {
-            "id": "female2",
-            "background": "Female-B aspires to be a principal ballerina, but her body presents physical challenges that affect her technique. Margaret Grand frequently highlights these limitations, which frustrates her as she believes they should not define her ability to achieve her dreams.",
-            "personality": "Determined and resilient, she has an unwavering belief that her passion for dance and commitment can overcome physical obstacles. She admires the famous principal dancer Elena Moreau. Elena's journey proves that you can succeed with an imperfect body!"
+            "background": "Female-B: \n aspires to be a principal ballerina,\n but her body presents physical challenges that affect her technique.\n Margaret Grand frequently highlights these limitations, \n which frustrates her as she believes they should not define her ability to achieve her dreams. She is determined and resilient, and has an unwavering belief that her passion for dance and commitment can overcome physical obstacles."
         },
         {
-            "id": "female3",
-            "background": "Female-C possesses the ideal physique for ballet and has impeccable technique.However, she faces immense pressure from her overbearing mother, who harbors unfulfilleddreams of becoming a top principal ballerina herself.",
-            "personality": "While she excels in technique, she often feels trapped under her mother's expectations. She dances perfectly but sometimes lacks the emotional depth that truly moves anaudience."
+            "background": "Female-C: \n possesses the ideal physique for ballet and has impeccable technique. \nHowever, she faces immense pressure from her overbearing mother, \n who harbors unfulfilled dreams of becoming a top principal ballerina herself. She often feels trapped under her mother's expectations. She dances perfectly but sometimes lacks the emotional depth that truly moves an audience."
         }
     ],
     "male-students": [
         {
-            "id": "male1",
-            "background": "Male-A is a talented contemporary dancer\n who has a strong passion for storytelling through movement.\n He often feels overshadowed by more confident peers,\n struggling with self-doubt and the fear\n that he won't stand out in the competitive environment ofthe academy.",
-            "personality": "Despite his insecurities,\n he is supportive and loyal to his friends.\n He often channels his feelings into his performances,\n creating poignant narratives that resonate withaudiences."
+            "background": "Male-A: \n is a talented contemporary dancer\n who has a strong passion for storytelling through movement.\n He often feels overshadowed by more confident peers,\n struggling with self-doubt and the fear\n that he won't stand out in the competitive environment of the academy."
         },
         {
-            "id": "male2",
-            "background": "Male-B is a charismatic performer\n with a flair for jazz and musical theatre.\nComing from a family of performers,\n he feels immense pressure to live up to their legacy,\n which often leads to self-doubt and insecurity.",
-            "personality": "He is outgoing and energetic,\n always lighting up the room with his presence.\nHowever, he struggles with the weight of expectations\n and often questions his own talent,\n even while finding joy in expressing himself on stage."
+            "background": "Male-B: \n  is a charismatic performer\n with a flair for jazz and musical theatre.\n Coming from a family of performers,\n he feels immense pressure to live up to their legacy,\n which often leads to self-doubt and insecurity."
         },
         {
-            "id": "male3",
-            "background": "Male-C is a ballet dancer with a strong technical foundation.\n He possesses a rebellious streak\n and often challenges traditional ballet norms,\n experimenting with moderninfluences in his dancing.",
-            "personality": "Passionate and innovative,\n he believes that dance should evolve and adapt.\nHowever, his experimental approach can lead \nto conflicts with instructors who prefer classicaltechniques."
+            "background": "Male-C: \n is a ballet dancer with a strong technical foundation.\n He possesses a rebellious streak\n and often challenges traditional ballet norms,\n experimenting with modern influences in his dancing."
+        }
+    ],
+    "secrets": [
+        {
+            "secret": "Secret Talent - A: \nAn exceptional painter"
+        },
+        {
+            "secret": "Secret Talent - B \n Phenomenal singer"
+        },
+        {
+            "secret": "Secret Talent - C \n Excellent writer and poet"
+        },
+        {
+            "secret": "Secret Talent - D \n Adept musician, playing guitar and composing original songs"
         }
     ]
 }
